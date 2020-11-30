@@ -2,7 +2,7 @@ const profile = document.querySelector('.profile');
 const popup = document.querySelector('.popup');
 const popupCloseButton = popup.querySelector('.popup__close-button');
 const popupCloseAction = popup.querySelector('.popup__opened');
-const editButton = profile.querySelector('.profile__info_edit-button');
+const editButton = profile.querySelector('.profile__edit-button');
 
 editButton.addEventListener('click',popupActionOpen);
 popupCloseButton.addEventListener('click',popupActionClose);
@@ -16,9 +16,9 @@ function popupActionClose(){
     popup.classList.remove('popup__opened');
 }
 
-const nameInputProfile = profile.querySelector('.profile__info_name');
+const nameInputProfile = profile.querySelector('.profile__name');
 const nameInputPopup = popup.querySelector('.popup__name');
-const aboutInputProfile = profile.querySelector('.profile__info_about');
+const aboutInputProfile = profile.querySelector('.profile__about');
 const aboutInputPopup = popup.querySelector('.popup__about');
 
 nameInputPopup.value = nameInputProfile.textContent;
