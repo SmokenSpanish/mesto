@@ -9,4 +9,4 @@
 5. Файловоя система по БЭМ в формате Nasted 
 6. JS 
 7. Модальное окно 
-Ссылка на [мой сайт](https://smokenspanish.github.io/russian-travel/index.html) на GitHub
+Ссылка на [мой сайт](https://smokenspanish.github.io/mesto/index.html) на GitHub
