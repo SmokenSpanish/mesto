@@ -1,0 +1,7 @@
+.popup__name{
+    border: 0;
+}
+
+.popup__name:focus{
+    outline: 0;
+}

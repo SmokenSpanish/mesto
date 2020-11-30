@@ -1,0 +1,15 @@
+.popup__about{
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+    margin-top: 30px;
+    padding: 0;
+    border: none;
+}
+
+.popup__about:focus{
+    outline: 0;
+}

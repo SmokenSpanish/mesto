@@ -1,0 +1,12 @@
+.element{
+background-color: white;
+color: black;
+max-width: 282px;
+border-radius: 10px;
+}
+
+@media all and (max-width: 887px){
+    .element{
+        margin: 0 auto;
+    }
+}

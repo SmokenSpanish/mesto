@@ -1,11 +1,107 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
-    
+
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <img src="./images/Vector2.svg" alt="место" class="header__logo link">
+            <img src="./images/Line.png" alt="линия" class="header__line">
+        </header>
+
+
+        <main class="content">
+            <nav class="profile">
+                <img src="./images/image.jpg" alt="аватар" class="profile__avatar">
+                <form class="profile__info">
+
+                    <p class="profile__info_name">Жак-Ив Кусто</p>
+                    <button class="profile__info_edit-button link" type="button">
+                        <img src="./images/buttonVector.png" alt="вектор" class="profile__info_edit-button_vector">
+                    </button>
+
+                    <p class="profile__info_about">Исследователь океана</p>
+                </form>
+                <button class="profile__add-button link">
+                    <img src="./images/plus.svg" alt="добавить" class="profile__add-button_vector">
+                </button>
+            </nav>
+            <section class="elements">
+                <div class="element"><img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай"
+                        class="element__image">
+                    <div class="element__info">
+                        <p class="element__title">Домбай</p>
+                        <img src="./images/heart.svg" alt="like" class="element__rectangle link">
+                    </div>
+                </div>
+                <div class="element"><img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус"
+                        class="element__image">
+                    <div class="element__info">
+                        <p class="element__title">Гора Эльбрус</p>
+                        <img src="./images/heart.svg" alt="like" class="element__rectangle link">
+                    </div>
+                </div>
+                <div class="element"><img src="./images/cherk.jpg" alt="Домбай"
+                        class="element__image">
+                    <div class="element__info">
+                        <p class="element__title">Карачаево-черкесия</p>
+                        <img src="./images/heart.svg" alt="like" class="element__rectangle link">
+                    </div>
+                </div>
+                <div class="element"><img src="./images/yakutia.jpg" alt="Якутия"
+                        class="element__image">
+                    <div class="element__info">
+                        <p class="element__title">Якутия</p>
+                        <img src="./images/heart.svg" alt="like" class="element__rectangle link">
+                    </div>
+                </div>
+                <div class="element"><img src="./images/multi.jpg" alt="Мультинские озера"
+                        class="element__image">
+                    <div class="element__info">
+                        <p class="element__title">Мультинские озера</p>
+                        <img src="./images/heart.svg" alt="like" class="element__rectangle link">
+                    </div>
+                </div>
+                <div class="element"><img src="./images/Seliger_-RIA-Novosti-1200x800.jpg" alt="Селигер"
+                        class="element__image">
+                    <div class="element__info">
+                        <p class="element__title">Селигер</p>
+                        <img src="./images/heart.svg" alt="like" class="element__rectangle link">
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__logo">&copy; 2020 Mesto Russia</p>
+        </footer>
+    </div>
+    <div class="popup">
+        <div class="popup__body">
+            <div class="popup__container">
+                <form action="">
+                    <button type="button" class="popup__close-button link"></button>
+                    <h1 class="popup__title">Редактировать профиль</h1>
+                    <fieldset class="popup__form">
+                        <input type="text" class="popup__name" name="username" placeholder="Имя">
+                    </fieldset>
+                    <img src="./images/Line 2.png" alt="линия" class="popup__line">
+                    <fieldset class="popup__form">
+                        <input type="text" class="popup__about" name="userjob" placeholder="О себе">
+                    </fieldset>
+                    <img src="./images/Line 2.png" alt="линия" class="popup__line">
+                    <button type="submit" class="popup__button link">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/script.js"></script>
 </body>
+
 </html>
