@@ -1,3 +1,21 @@
 .element__rectangle{
+    width: 20.7px;
+    height: 18.13px;
     align-self: center;
+    background-image: url('../../../images/heart.svg');
+    background-position: center;
+    background-size: cover;
+    border: none;
+    background-color: white;
+}
+
+.element__rectangle:active{
+    width: 20.7px;
+    height: 18.13px;
+    align-self: center;
+    background-image: url('../../../images/BlackHeart.svg');
+    background-position: center;
+    background-size: cover;
+    border: none;
+    background-color: white;
 }
