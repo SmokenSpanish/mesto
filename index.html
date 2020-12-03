@@ -12,66 +12,61 @@
 <body class="body">
     <div class="page">
         <header class="header">
-            <img src="./images/Vector2.svg" alt="место" class="header__logo link">
+            <img src="./images/Vector2.svg" alt="место" class="header__logo">
         </header>
 
 
         <main class="content">
-            <nav class="profile">
+            <div class="profile">
                 <img src="./images/image.jpg" alt="аватар" class="profile__avatar">
-                <form class="profile__info">
-
-                    <p class="profile__name">Жак-Ив Кусто</p>
-                    <button class="profile__edit-button link" type="button">
-                        <img src="./images/BtnVector.svg" alt="карандаш">
-                    </button>
-
+                <div class="profile__info">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button link" type="button"></button>
                     <p class="profile__about">Исследователь океана</p>
-                </form>
+                </div>
                 <button class="profile__add-button link" type="submit">
-                    <img src="./images/plus.svg" alt="добавить">
                 </button>
-            </nav>
+            </div>
             <section class="elements">
-                <div class="element"><img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай"
+                <article class="element"><img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай"
                         class="element__image">
                     <div class="element__info">
-                        <p class="element__title">Домбай</p>
+                        <h2 class="element__title">Домбай</h2>
                         <button type="button" class="element__rectangle link"></button>
                     </div>
-                </div>
-                <div class="element"><img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус"
+                </article>
+                <article class="element"><img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус"
                         class="element__image">
                     <div class="element__info">
-                        <p class="element__title">Гора Эльбрус</p>
+                        <h2 class="element__title">Гора Эльбрус</h2>
                         <button type="button" class="element__rectangle link"></button>
                     </div>
-                </div>
-                <div class="element"><img src="./images/cherk.jpg" alt="Домбай" class="element__image">
+                </article>
+                <article class="element"><img src="./images/cherk.jpg" alt="Домбай" class="element__image">
                     <div class="element__info">
-                        <p class="element__title">Карачаево-черкесия</p>
+                        <h2 class="element__title">Карачаево-черкесия</h2>
                         <button type="button" class="element__rectangle link"></button>
                     </div>
-                </div>
-                <div class="element"><img src="./images/yakutia.jpg" alt="Якутия" class="element__image">
+                </article>
+                <article class="element"><img src="./images/yakutia.jpg" alt="Якутия" class="element__image">
                     <div class="element__info">
-                        <p class="element__title">Якутия</p>
+                        <h2 class="element__title">Якутия</h2>
                         <button type="button" class="element__rectangle link"></button>
                     </div>
-                </div>
-                <div class="element"><img src="./images/multi.jpg" alt="Мультинские озера" class="element__image">
+                </article>
+                <article class="element"><img src="./images/multi.jpg" alt="Мультинские озера" class="element__image">
                     <div class="element__info">
-                        <p class="element__title">Мультинские озера</p>
+                        <h2 class="element__title">Мультинские озера</h2>
                         <button type="button" class="element__rectangle link"></button>
                     </div>
-                </div>
-                <div class="element"><img src="./images/Seliger_-RIA-Novosti-1200x800.jpg" alt="Селигер"
+                </article>
+                <article class="element"><img src="./images/Seliger_-RIA-Novosti-1200x800.jpg" alt="Селигер"
                         class="element__image">
                     <div class="element__info">
-                        <p class="element__title">Селигер</p>
+                        <h2 class="element__title">Селигер</h2>
                         <button type="button" class="element__rectangle link"></button>
                     </div>
-                </div>
+                </article>
             </section>
         </main>
         <footer class="footer">
@@ -81,17 +76,13 @@
     <div class="popup">
         <div class="popup__body">
             <div class="popup__container">
-                <form>
+                <form name="popup-info">
                     <button type="button" class="popup__close-button link"></button>
-                    <h1 class="popup__title">Редактировать профиль</h1>
+                    <h3 class="popup__title">Редактировать профиль</h3>
                     <fieldset class="popup__form">
-                        <input type="text" class="popup__name" name="username" placeholder="Имя">
+                        <input type="text" class="popup__name popup__input" name="username" placeholder="Имя">
+                        <input type="text" class="popup__about popup__input" name="userjob" placeholder="О себе">
                     </fieldset>
-                    <img src="./images/Line2.png" alt="линия" class="popup__line">
-                    <fieldset class="popup__form">
-                        <input type="text" class="popup__about" name="userjob" placeholder="О себе">
-                    </fieldset>
-                    <img src="./images/Line2.png" alt="линия" class="popup__line">
                     <button type="submit" class="popup__button">Сохранить</button>
                 </form>
             </div>

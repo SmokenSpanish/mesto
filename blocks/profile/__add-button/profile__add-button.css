@@ -6,10 +6,14 @@
     border-radius: 2px;
     margin-left: auto;
     box-sizing: border-box;
+    background-image: url('../../../images/plus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @media all and (max-width: 588px){
     .profile__add-button{
+        background-image: url('../../../images/plus-mini.svg');
         margin: 36px auto 0;
         width: 282px;
     }

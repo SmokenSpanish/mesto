@@ -8,7 +8,9 @@
     height: 40px;
     position: absolute;
     top: -13%;
-    right: -10%;
+    right: -9%;
+    margin: 0;
+    padding: 0;
 }
 
 @media all and (max-width: 600px){

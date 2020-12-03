@@ -6,7 +6,7 @@
 @media all and (max-width: 550px){
     .header__logo{
         max-width: 103.74px;
-        padding-left: 27px;
+        /*padding-left: 27px;*/
         padding-bottom: 31.6px;
     }
 }
