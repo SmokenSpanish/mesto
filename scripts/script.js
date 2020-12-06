@@ -1,27 +1,24 @@
 let profile = document.querySelector('.profile');
 let popup = document.querySelector('.popup');
 let popupCloseButton = popup.querySelector('.popup__close-button');
-let popupCloseAction = popup.querySelector('.popup_opened');
 let editButton = profile.querySelector('.profile__edit-button');
 let nameInputProfile = profile.querySelector('.profile__name');
-let nameInputPopup = popup.querySelector('.popup__name');
+let nameInputPopup = popup.querySelector('.popup__input_type_name');
 let aboutInputProfile = profile.querySelector('.profile__about');
-let aboutInputPopup = popup.querySelector('.popup__about');
+let aboutInputPopup = popup.querySelector('.popup__input_type_description');
 let popupSaveButton = document.querySelector('.popup__button');
 
 
 function popupActionOpen(){
-    popup.classList.add('popup_opened');
     nameInputPopup.value = nameInputProfile.textContent;
     aboutInputPopup.value = aboutInputProfile.textContent;
+    popup.classList.add('popup_opened');
 }
 
 
 function popupActionClose(){
     popup.classList.remove('popup_opened');
 }
-
-
 
 
 function saveInputValue(evt) {
@@ -33,4 +30,4 @@ function saveInputValue(evt) {
 
 editButton.addEventListener('click',popupActionOpen);
 popupCloseButton.addEventListener('click',popupActionClose);
-popupSaveButton.addEventListener('click', saveInputValue);
+popup.addEventListener('submit', saveInputValue);

@@ -2,15 +2,16 @@
     background-image: url('../../../images/Close\ Icon.svg');
     background-size: cover;
     border: none;
-    background-color: rgb(0, 0, 0, 0);
+    background-color: rgba(230, 11, 11, 0);
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 33px;
+    height: 33px;
     position: absolute;
-    top: -13%;
+    top: -11%;
     right: -9%;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 @media all and (max-width: 600px){
