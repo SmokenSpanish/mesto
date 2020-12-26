@@ -108,7 +108,7 @@ function composeItem(item){
     return newItem;
 }
 
-
+const form = document.forms.popupPlaceinfo;
 
 function addNewItem(evt) {
     evt.preventDefault();
@@ -117,7 +117,10 @@ function addNewItem(evt) {
     const newItem = composeItem({name: inputText, link: inputLink});
     userContainerElements.prepend(newItem);
     popupActionClose(popupPlace);
+    popupPlaceinfo.reset();
 } 
+
+
 
 popupPlace.addEventListener('submit', addNewItem);
 
