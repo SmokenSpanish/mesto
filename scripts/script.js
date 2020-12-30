@@ -14,8 +14,9 @@ const aboutInputProfile = profile.querySelector('.profile__about');
 const aboutInputPopup = popup.querySelector('.popup__input_type_description');
 const LinkInputPopup = popupPlace.querySelector('.popup__input_type_imgLink');
 const popupSaveButton = document.querySelector('.popup__button');
-const popupCreateButton = popupPlace.querySelector('.popup__create');
 const popupPic = popupImage.querySelector('.popup__image');
+const popupImageTitle = document.querySelector('.popup__image-title');
+const form = document.forms.popupPlaceinfo;
 
 function popupActionOpen(popup){
     popup.classList.add('popup_opened');
@@ -100,15 +101,18 @@ function composeItem(item){
     const userPlaceLink = newItem.querySelector('.element__image');
     userPlaceName.textContent = item.name;
     userPlaceLink.src = item.link;
+    item.link.setAttribute = ("alt", "place");
     const removeButton = newItem.querySelector('.element__trash');
     removeButton.addEventListener('click', removeItem);
     const likeButton = newItem.querySelector('.element__rectangle');
-    likeButton.addEventListener('click', actionLike);
-    userPlaceLink.addEventListener('click', PopupImageActionOpen);
+    likeButton.addEventListener('click', handleLikeClick);
+    userPlaceLink.addEventListener('click', ()=>{
+        PopupImageActionOpen(item) //где item объект с данными
+       });
     return newItem;
 }
 
-const form = document.forms.popupPlaceinfo;
+
 
 function addNewItem(evt) {
     evt.preventDefault();
@@ -117,31 +121,23 @@ function addNewItem(evt) {
     const newItem = composeItem({name: inputText, link: inputLink});
     userContainerElements.prepend(newItem);
     popupActionClose(popupPlace);
-    popupPlaceinfo.reset();
+    form.reset();
 } 
-
-
 
 popupPlace.addEventListener('submit', addNewItem);
 
 function removeItem(e){
-    const targetElement = e.target;
-    const targetItem = targetElement.closest('.element');
-    targetItem.remove();
+    e.target.closest('.element').remove();
 }
 
-function actionLike(e){
-    const targetLike = e.target;
-    const targetItem = targetLike.closest('.element__rectangle');
-    targetItem.classList.toggle('element__rectangle_active');
+function handleLikeClick(e){
+    e.target.classList.toggle('element__rectangle_active');
 }
 
-
-function PopupImageActionOpen(e){
-    const targetElement = e.target;
-    const popupImageTitle = document.querySelector('.popup__image-title');
-    // popupImageTitle.textContent = targetElement.closest('.element__title').textContent; почему то не работает:{
-    popupImageTitle.textContent = document.querySelector('.element__title').textContent;
-    popupPic.src = targetElement.closest('.element__image').src;
-    popupImage.classList.add('popup_opened');
+function PopupImageActionOpen(data){
+    popupPic.src = data.link;
+    popupPic.alt = data.name;
+    popupPic.alt = "Место";
+    popupImageTitle.textContent = data.name;
+    popupActionOpen(popupImage);
 }
