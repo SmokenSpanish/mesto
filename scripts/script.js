@@ -13,16 +13,17 @@ const placeNameInputPopup = popupPlace.querySelector('.popup__input_type_placeNa
 const aboutInputProfile = profile.querySelector('.profile__about');
 const aboutInputPopup = popup.querySelector('.popup__input_type_description');
 const LinkInputPopup = popupPlace.querySelector('.popup__input_type_imgLink');
-const popupSaveButton = document.querySelector('.popup__button');
 const popupPic = popupImage.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
-const form = document.forms.popupPlaceinfo;
+const PlaceForm = document.querySelector('form[class=popup-place__form]');
+const userContainerElements = document.querySelector('.elements'); //контейнер
+const userTemplate = document.querySelector('#user'); //dom template
 
-function popupActionOpen(popup){
+function popupActionOpen(popup) {
     popup.classList.add('popup_opened');
 }
 
-function popupActionClose(popup){
+function popupActionClose(popup) {
     popup.classList.remove('popup_opened');
 }
 
@@ -33,30 +34,29 @@ function saveInputValue(evt) {
     popupActionClose(popup);
 }
 
-editButton.addEventListener('click', function(){
+editButton.addEventListener('click', function () {
     nameInputPopup.value = nameInputProfile.textContent;
     aboutInputPopup.value = aboutInputProfile.textContent;
     popupActionOpen(popup);
 });
 
-popupCloseButton.addEventListener('click', function(){
+popupCloseButton.addEventListener('click', function () {
     popupActionClose(popup);
 });
 
-addButton.addEventListener('click', function(){
+addButton.addEventListener('click', function () {
     popupActionOpen(popupPlace);
 });
 
-popupPlaceCloseButton.addEventListener('click', function(){
+popupPlaceCloseButton.addEventListener('click', function () {
     popupActionClose(popupPlace);
 });
 
-popupImageCloseButton.addEventListener('click', function(){
+popupImageCloseButton.addEventListener('click', function () {
     popupActionClose(popupImage);
 });
 
 popup.addEventListener('submit', saveInputValue);
-
 
 const initialCards = [
     {
@@ -85,59 +85,52 @@ const initialCards = [
     }
 ];
 
-const userContainerElements = document.querySelector('.elements'); //контейнер
-const userTemplate = document.querySelector('#user'); //dom template
-
-function renderElement(){
+function renderElement() {
     const listItems = initialCards.map(composeItem);
     userContainerElements.append(...listItems);
 }//рендерим массив
 renderElement();
 
-
-function composeItem(item){
+function composeItem(item) {
     const newItem = userTemplate.content.cloneNode(true);
     const userPlaceName = newItem.querySelector('.element__title');
     const userPlaceLink = newItem.querySelector('.element__image');
     userPlaceName.textContent = item.name;
     userPlaceLink.src = item.link;
-    item.link.setAttribute = ("alt", "place");
+    userPlaceLink.alt = item.name;
     const removeButton = newItem.querySelector('.element__trash');
     removeButton.addEventListener('click', removeItem);
     const likeButton = newItem.querySelector('.element__rectangle');
     likeButton.addEventListener('click', handleLikeClick);
-    userPlaceLink.addEventListener('click', ()=>{
+    userPlaceLink.addEventListener('click', () => {
         PopupImageActionOpen(item) //где item объект с данными
-       });
+    });
     return newItem;
 }
-
-
 
 function addNewItem(evt) {
     evt.preventDefault();
     const inputText = placeNameInputPopup.value;
     const inputLink = LinkInputPopup.value;
-    const newItem = composeItem({name: inputText, link: inputLink});
+    const newItem = composeItem({ name: inputText, link: inputLink });
     userContainerElements.prepend(newItem);
     popupActionClose(popupPlace);
-    form.reset();
-} 
+    PlaceForm.reset();
+}
 
 popupPlace.addEventListener('submit', addNewItem);
 
-function removeItem(e){
+function removeItem(e) {
     e.target.closest('.element').remove();
 }
 
-function handleLikeClick(e){
+function handleLikeClick(e) {
     e.target.classList.toggle('element__rectangle_active');
 }
 
-function PopupImageActionOpen(data){
+function PopupImageActionOpen(data) {
     popupPic.src = data.link;
-    popupPic.alt = data.name;
-    popupPic.alt = "Место";
+    popupPic.alt = data.name; 
     popupImageTitle.textContent = data.name;
     popupActionOpen(popupImage);
 }
