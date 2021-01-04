@@ -15,12 +15,20 @@ const aboutInputPopup = popup.querySelector('.popup__input_type_description');
 const LinkInputPopup = popupPlace.querySelector('.popup__input_type_imgLink');
 const popupPic = popupImage.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
-const PlaceForm = document.querySelector('form[class=popup-place__form]');
+const formAdd = document.querySelector('.popup-place__form');
+const placeInput = formAdd.querySelector('.popup__input_type_placeName');
 const userContainerElements = document.querySelector('.elements'); //контейнер
 const userTemplate = document.querySelector('#user'); //dom template
+const inputList = formAdd.querySelectorAll('.popup__input');
+const submitButton = formAdd.querySelector('.popup__button');
 
 function popupActionOpen(popup) {
     popup.classList.add('popup_opened');
+    popup.addEventListener('click', function (evt) {
+        if (!evt.target.closest('.popup__container')) {
+            popupActionClose(evt.target.closest('.popup'));
+        }
+    })
 }
 
 function popupActionClose(popup) {
@@ -33,57 +41,6 @@ function saveInputValue(evt) {
     aboutInputProfile.textContent = aboutInputPopup.value;
     popupActionClose(popup);
 }
-
-editButton.addEventListener('click', function () {
-    nameInputPopup.value = nameInputProfile.textContent;
-    aboutInputPopup.value = aboutInputProfile.textContent;
-    popupActionOpen(popup);
-});
-
-popupCloseButton.addEventListener('click', function () {
-    popupActionClose(popup);
-});
-
-addButton.addEventListener('click', function () {
-    popupActionOpen(popupPlace);
-});
-
-popupPlaceCloseButton.addEventListener('click', function () {
-    popupActionClose(popupPlace);
-});
-
-popupImageCloseButton.addEventListener('click', function () {
-    popupActionClose(popupImage);
-});
-
-popup.addEventListener('submit', saveInputValue);
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 function renderElement() {
     const listItems = initialCards.map(composeItem);
@@ -115,10 +72,8 @@ function addNewItem(evt) {
     const newItem = composeItem({ name: inputText, link: inputLink });
     userContainerElements.prepend(newItem);
     popupActionClose(popupPlace);
-    PlaceForm.reset();
+    formAdd.reset();
 }
-
-popupPlace.addEventListener('submit', addNewItem);
 
 function removeItem(e) {
     e.target.closest('.element').remove();
@@ -130,7 +85,40 @@ function handleLikeClick(e) {
 
 function PopupImageActionOpen(data) {
     popupPic.src = data.link;
-    popupPic.alt = data.name; 
+    popupPic.alt = data.name;
     popupImageTitle.textContent = data.name;
     popupActionOpen(popupImage);
 }
+
+popupPlace.addEventListener('submit', addNewItem);
+
+editButton.addEventListener('click', function () {
+    nameInputPopup.value = nameInputProfile.textContent;
+    aboutInputPopup.value = aboutInputProfile.textContent;
+    popupActionOpen(popup);
+});
+
+popupCloseButton.addEventListener('click', function () {
+    popupActionClose(popup);
+});
+
+addButton.addEventListener('click', function () {
+    popupActionOpen(popupPlace);
+});
+
+popupPlaceCloseButton.addEventListener('click', function () {
+    popupActionClose(popupPlace);
+});
+
+popupImageCloseButton.addEventListener('click', function () {
+    popupActionClose(popupImage);
+});
+
+popup.addEventListener('submit', saveInputValue);
+
+document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+        const popupOpened = document.querySelector('.popup_opened');
+        popupActionClose(popupOpened);
+    }
+})

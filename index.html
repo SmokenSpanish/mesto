@@ -35,14 +35,22 @@
     <div class="popup">
         <div class="popup__body">
             <div class="popup__container">
-                <form name="popup-info">
+                <form name="popup-info" class="popup__forms" novalidate>
                     <button type="button" class="popup__close-button link"></button>
                     <h3 class="popup__title">Редактировать профиль</h3>
                     <fieldset class="popup__form">
-                        <input type="text" class="popup__input_type_name popup__input" name="username"
-                            placeholder="Имя">
-                        <input type="text" class="popup__input_type_description popup__input" name="userjob"
-                            placeholder="О себе">
+                        <label for="#" class="popup__label">
+                            <input type="text" class="popup__input_type_name popup__input" name="username" required
+                                minlength="2" maxlength="40" type="text" autocomplete="off" id="name-card"
+                                placeholder="Имя">
+                            <span class="error" id="name-card-error"></span>
+                        </label>
+                        <label for="#" class="popup__label">
+                            <input type="text" class="popup__input_type_description popup__input" name="userjob"
+                                placeholder="О себе" autocomplete="off" id="job-card" required minlength="2"
+                                maxlength="200">
+                            <span class="error" id="job-card-error"></span>
+                        </label>
                     </fieldset>
                     <button type="submit" class="popup__button">Сохранить</button>
                 </form>
@@ -52,14 +60,21 @@
     <div class="popup popup-place">
         <div class="popup__body">
             <div class="popup__container">
-                <form name="popupPlaceInfo" class="popup-place__form">
+                <form name="popupPlaceInfo" class="popup-place__form popup__forms" novalidate>
                     <button type="reset" class="popup__close-button link"></button>
                     <h3 class="popup__title">Новое место</h3>
                     <fieldset class="popup__form">
-                        <input type="text" class="popup__input_type_placeName popup__input" name="placename"
-                            placeholder="Название">
-                        <input type="url" class="popup__input_type_imgLink popup__input" name="placelink"
-                            placeholder="Ссылка на картинку">
+                        <label for="#" class="popup__label">
+                            <input type="text" class="popup__input_type_placeName popup__input" name="placename"
+                                placeholder="Название" required minlength="2" maxlength="30" type="text"
+                                autocomplete="off" id="place-card">
+                            <span class="error" id="place-card-error"></span>
+                        </label>
+                        <label for="#" class="popup__label">
+                            <input type="url" class="popup__input_type_imgLink popup__input" name="placelink"
+                                placeholder="Ссылка на картинку" id="link-card" required minlength="3">
+                            <span class="error" id="link-card-error"></span>
+                        </label>
                     </fieldset>
                     <button type="submit" class="popup__button popup__create">Создать</button>
                 </form>
@@ -85,7 +100,9 @@
             </div>
         </article>
     </template>
+    <script src="./scripts/initial-сards.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
