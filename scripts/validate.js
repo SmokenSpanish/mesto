@@ -48,7 +48,6 @@ function enableValidation(config) {
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            console.log('Форма отправлена');
         });
         const submitButton = form.querySelector(config.submitButtonSelector);
         setButtonState(submitButton, form.checkValidity(), config)
