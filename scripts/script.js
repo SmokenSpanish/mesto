@@ -29,7 +29,7 @@ function popupActionOpen(popup) {
     popup.classList.add('popup_opened');
 
     document.addEventListener('keydown', popupKeydownExit);
-    popupKeydownExit();
+    
 }
 
 function popupActionClose(popup) {
@@ -75,7 +75,7 @@ function addNewItem(evt) {
     userContainerElements.prepend(newItem);
     popupActionClose(popupPlace);
     formAdd.reset();
-    createButton.disabled = 'disabled';
+    disabledButton(createButton);
     createButton.classList.add('popup__button_invalid');
 }
 
@@ -94,14 +94,12 @@ function popupImageActionOpen(data) {
     popupActionOpen(popupImage);
 }
 
-function popupKeydownExit() {
-    document.addEventListener('keydown', function (evt) {
+function popupKeydownExit(evt) {
         if (evt.key === 'Escape') {
             const popupOpened = document.querySelector('.popup_opened');
             popupActionClose(popupOpened);
         }
-    })
-}
+    }
 
 function closePopupAria(evt) {
     if (!evt.target.closest('.popup__container')) {

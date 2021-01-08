@@ -24,9 +24,13 @@ function setButtonState(button, isActive, config) {
         button.disabled = false;
     } else {
         button.classList.add(config.inactiveButtonClass);
-        button.disabled = 'disabled';
+        disabledButton(button);
     }
 
+}
+
+function disabledButton(button) {
+    button.disabled = 'disabled';
 }
 
 function setEventListener(form, config) {
