@@ -1,74 +1,13 @@
-// function showError(form, input, config) {
-//     const error = form.querySelector(`#${input.id}-error`);
-//     error.textContent = input.validationMessage;
-//     input.classList.add(config.buttonInvalidClass);
-// }
-
-// function hideError(form, input, config) {
-//     const error = form.querySelector(`#${input.id}-error`);
-//     error.textContent = "";
-//     input.classList.remove(config.buttonInvalidClass);
-// }
-
-// function checkInputValidity(form, input, config) {
-//     if (input.validity.valid) {
-//         hideError(form, input, config);
-//     } else {
-//         showError(form, input, config);
-//     }
-// }
-
-// function setButtonState(button, isActive, config) {
-//     if (isActive) {
-//         button.classList.remove(config.inactiveButtonClass);
-//         button.disabled = false;
-//     } else {
-//         button.classList.add(config.inactiveButtonClass);
-//         disabledButton(button);
-//     }
-
-// }
-
-// function disabledButton(button) {
-//     button.disabled = 'disabled';
-// }
-
-// function setEventListener(form, config) {
-//     const inputList = form.querySelectorAll(config.inputSelector);
-//     const submitButton = form.querySelector(config.submitButtonSelector);
-
-//     inputList.forEach(input => {
-//         input.addEventListener('input', (evt) => {
-//             checkInputValidity(form, input, config);
-//             setButtonState(submitButton, form.checkValidity(), config)
-//         })
-//     });
-// }
-
-// function enableValidation(config) {
-//     const forms = document.querySelectorAll(config.formSelector);
-//     forms.forEach(form => {
-//         setEventListener(form, config)
-
-//         form.addEventListener('submit', (evt) => {
-//             evt.preventDefault();
-//         });
-//         const submitButton = form.querySelector(config.submitButtonSelector);
-//         setButtonState(submitButton, form.checkValidity(), config)
-//     })
-// }
-
-
 const configValidate = {
     formSelector: '.popup__forms',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
     inputErrorClass: '.popup__input_type_error',
-    inactiveButtonClass: '.popup__button_invalid',
+    inactiveButtonClass: 'popup__button_invalid',
     buttonInvalidClass: '.popup__input_state_invalid'
 };
 
-class FormValidator {
+export default class FormValidator {
     constructor(options, formSelector) {
         this._inputSelector = options.inputSelector;
         this._submitButtonSelector = options.submitButtonSelector;
@@ -79,13 +18,13 @@ class FormValidator {
     }
 
     _showError(inputElement, errorMessage) {
-        const error = document.querySelector(`.${inputElement.id}-error`);
+        const error = document.querySelector(`#${inputElement.id}-error`);
         error.textContent = errorMessage;
         error.classList.add(this._buttonInvalidClass);
     }
 
     _hideError = (inputElement) => {
-        const error = document.querySelector(`.${inputElement.id}-error`);
+        const error = document.querySelector(`#${inputElement.id}-error`);
         error.textContent = "";
         error.classList.remove(this._buttonInvalidClass);
     }
@@ -115,6 +54,10 @@ class FormValidator {
         }
       };
 
+      _disabledButton() {
+        this._inactiveButtonClass = 'disabled';
+        }
+
     _setEventListeners = () => {
         this._formSelector.addEventListener('submit', (evt) => {
             evt.preventDefault();
@@ -122,8 +65,6 @@ class FormValidator {
 
         this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
         this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector);
-
-        
 
         const inputListIterator = (inputElement) => {
             const handleInput = () => {
@@ -139,8 +80,6 @@ class FormValidator {
 
     };
 
-
-
     enableValidation() {
         this._setEventListeners()
     }
@@ -152,6 +91,6 @@ class FormValidator {
 
 }
 
-const profileFormValidator = new FormValidator(configValidate, profileForm);
 
-profileFormValidator.enableValidation();
+
+export {configValidate};
