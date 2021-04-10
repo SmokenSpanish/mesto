@@ -1,39 +1,15 @@
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+import {openPopup} from "./script.js"
+import {popupPic, popupImageTitle, popupImage} from "./Utils.js"
 
 export default class Card {
     constructor(link, name, cardSelector) {
         this._image = link;
         this._caption = name;
-        this._cardSelector = cardSelector;  
+        this._cardSelector = cardSelector; 
     }
 
         _composeItem() {
-            const newItem = document.querySelector('.template')
+            const newItem = document.querySelector(this._cardSelector)
             .content.querySelector('.element')
             .cloneNode(true);
             return newItem;
@@ -43,7 +19,6 @@ export default class Card {
             this._element = this._composeItem();
             this._setEventListeners();
             this._element.querySelector('.element__image').src = this._image;
-            this._element.querySelector('.element__image').alt = this._alt;
             this._element.querySelector('.element__title').textContent = this._caption;  
             return this._element;
             
@@ -62,7 +37,8 @@ export default class Card {
         }
 
         _handleDelete() {
-            this._element.closest('.element').remove();
+            this._element.remove();
+            this._element = null;
         }
 
         _likeActive() {
@@ -73,8 +49,6 @@ export default class Card {
             popupPic.src = this._image;
             popupPic.alt = this._caption;
             popupImageTitle.textContent = this._caption;
-            popupActionOpen(popupImage);
+            openPopup(popupImage);
         }
 }
-
-export {initialCards};

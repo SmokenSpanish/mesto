@@ -1,20 +1,11 @@
-const configValidate = {
-    formSelector: '.popup__forms',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inputErrorClass: '.popup__input_type_error',
-    inactiveButtonClass: 'popup__button_invalid',
-    buttonInvalidClass: '.popup__input_state_invalid'
-};
-
 export default class FormValidator {
-    constructor(options, formSelector) {
+    constructor(options, formElement) {
         this._inputSelector = options.inputSelector;
         this._submitButtonSelector = options.submitButtonSelector;
         this._inactiveButtonClass = options.inactiveButtonClass;
         this._inputErrorClass = options.inputErrorClass;
         this._buttonInvalidClass = options.buttonInvalidClass;
-        this._formSelector = formSelector;
+        this._formElement = formElement;
     }
 
     _showError(inputElement, errorMessage) {
@@ -54,17 +45,13 @@ export default class FormValidator {
         }
       };
 
-      _disabledButton() {
-        this._inactiveButtonClass = 'disabled';
-        }
-
     _setEventListeners = () => {
-        this._formSelector.addEventListener('submit', (evt) => {
+        this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
 
-        this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
-        this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector);
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
         const inputListIterator = (inputElement) => {
             const handleInput = () => {
@@ -90,7 +77,3 @@ export default class FormValidator {
       }
 
 }
-
-
-
-export {configValidate};
