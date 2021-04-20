@@ -6,17 +6,17 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body class="body">
     <div class="page">
         <header class="header">
-            <img src="./images/Vector2.svg" alt="место" class="header__logo">
+            <img src="<%=require('./images/Vector2.svg')%>" alt="место" class="header__logo">
         </header>
         <main class="content">
             <div class="profile">
-                <img src="./images/image.jpg" alt="аватар" class="profile__avatar">
+                <img src="<%=require('./images/image.jpg')%>" alt="аватар" class="profile__avatar">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button class="profile__edit-button link" type="button"></button>
@@ -32,6 +32,8 @@
             <p class="footer__logo">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
+
+    <!-- форма ред профиля -->
     <div class="popup popup-profile">
         <div class="popup__body">
             <div class="popup__container">
@@ -56,7 +58,9 @@
             </div>
         </div>
     </div>
-    <div class="popup popup-place">
+
+    <!-- форма добавления карточки -->
+    <div class="popup popup-place"> 
         <div class="popup__body">
             <div class="popup__container">
                 <form name="popupPlaceInfo" class="popup-place__form popup__forms" novalidate>
@@ -80,15 +84,19 @@
             </div>
         </div>
     </div>
+
+    <!-- попап картинки -->
     <div class="popup popup-image">
         <div class="popup__body">
             <div class="popup__image-container">
-                <button type="button" class="popup__image-button link"></button>
+                <button type="button" class="popup__close-button popup__image-button link"></button>
                 <img src='#' alt="место" class="popup__image">
                 <p class="popup__image-title"></p>
             </div>
         </div>
     </div>
+
+    <!-- шаблон карточки -->
     <template class="template">
         <article class="element">
             <button class="element__trash link"></button>

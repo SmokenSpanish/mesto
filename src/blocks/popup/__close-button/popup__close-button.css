@@ -1,5 +1,5 @@
-.popup__image-button{
-    background-image: url('../../../images/Close\ Icon.svg');
+.popup__close-button{
+    background-image: url('../../../images/CLOSEICON.svg');
     background-size: cover;
     border: none;
     background-color: rgba(230, 11, 11, 0);
@@ -7,7 +7,7 @@
     width: 33px;
     height: 33px;
     position: absolute;
-    top: -7%;
+    top: -11%;
     right: -9%;
     margin: 0;
     padding: 0;
@@ -15,10 +15,10 @@
 }
 
 @media all and (max-width: 600px){
-    .popup__image-button{
-        width: 23px;
-        height: 24px;
-        top: -8%;
-        right: -11%;
+    .popup__close-button{
+        width: 26px;
+        height: 26px;
+        top: -15%;
+        right: 1%;
     }
 }

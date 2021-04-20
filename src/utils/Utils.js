@@ -52,6 +52,8 @@ const popupLinkInput = popupPlace.querySelector('.popup__input_type_imgLink');
 const formAdd = document.querySelector('.popup-place__form');
 const userContainerElements = document.querySelector('.elements'); //контейнер
 const profileForm = popupProfile.querySelector('.popup__forms');
+const addCardPopupSelector = '.popup-place';
+const profilePopupSelector = '.popup-profile';
 
 export { 
     initialCards,
@@ -75,5 +77,7 @@ export {
     popupLinkInput,
     formAdd,
     userContainerElements,
-    profileForm
+    profileForm,
+    addCardPopupSelector,
+    profilePopupSelector
 }
