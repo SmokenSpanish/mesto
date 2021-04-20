@@ -17,6 +17,7 @@ export default class Card {
         this._element = this._composeItem();
         this._setEventListeners();
         this._element.querySelector('.element__image').src = this._image;
+        this._element.querySelector('.element__title').alt = this._caption;
         this._element.querySelector('.element__title').textContent = this._caption;
         return this._element;
 

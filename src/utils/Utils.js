@@ -54,6 +54,7 @@ const userContainerElements = document.querySelector('.elements'); //конте�
 const profileForm = popupProfile.querySelector('.popup__forms');
 const addCardPopupSelector = '.popup-place';
 const profilePopupSelector = '.popup-profile';
+const popupBody = document.querySelector('.popup__body');
 
 export { 
     initialCards,
@@ -79,5 +80,6 @@ export {
     userContainerElements,
     profileForm,
     addCardPopupSelector,
-    profilePopupSelector
+    profilePopupSelector,
+    popupBody
 }

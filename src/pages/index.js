@@ -10,7 +10,7 @@ import {
     profileAddButton, nameInputProfile, profileAboutInput,
     formAdd, userContainerElements,
     profileForm, addCardPopupSelector,
-    profilePopupSelector
+    profilePopupSelector, popupBody
 } from "../utils/Utils.js";
 
 const handleAddCard = () => {
