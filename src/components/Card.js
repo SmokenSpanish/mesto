@@ -15,10 +15,12 @@ export default class Card {
 
     generateCard() {
         this._element = this._composeItem();
+        const imageEl = this._element.querySelector('.element__image');
+        const titleEl = this._element.querySelector('.element__title');
         this._setEventListeners();
-        this._element.querySelector('.element__image').src = this._image;
-        this._element.querySelector('.element__title').alt = this._caption;
-        this._element.querySelector('.element__title').textContent = this._caption;
+        imageEl.src = this._image;
+        titleEl.alt = this._caption;
+        titleEl.textContent = this._caption;
         return this._element;
 
     }
