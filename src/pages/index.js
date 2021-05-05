@@ -1,3 +1,4 @@
+import Api from "../components/Api.js";
 import './index.css';
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js"
@@ -5,13 +6,17 @@ import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import FormValidator from "../components/FormValidator.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js"
 import {
-    configValidate, initialCards, profileEditButton,
-    profileAddButton, nameInputProfile, profileAboutInput,
+    configAPI, configValidate, profileEditButton,
+    profileAddButton,
     formAdd, userContainerElements,
     profileForm, addCardPopupSelector,
-    profilePopupSelector, popupBody
+    profilePopupSelector, confirmPopupSelector, avatarPopupSelector, avatarForm, avatarLogo,
+    nameSelector, jobSelector, avatarSelector, popupAboutInput, nameInputPopup
 } from "../utils/Utils.js";
+
+let currentUser;
 
 const handleAddCard = () => {
     formAdd.reset();
@@ -20,69 +25,149 @@ const handleAddCard = () => {
 };
 
 const handleEditProfile = () => {
-    const { name, job } = user.getUserInfo();
-    nameInputProfile.value = name;
-    profileAboutInput.value = job;
+    const { name, job } = userEl.getUserInfo();
+    nameInputPopup.value = name;
+    popupAboutInput.value = job;
     profileFormValidator.clearValidation();
     profilePopup.open();
 };
 
 const popupWithImage = new PopupWithImage('.popup-image');
 
-const getCard = (data) => {
-    const card = new Card(data, () => popupWithImage.open(data.link, data.name), '.template');
-    return card.generateCard();
+const confirmAction = () => {
+    return new Promise((res, rej) => {
+        confirmPopup.open(res, rej);
+    });
+};
+
+function deleteCardWithConfirm(data, card) {
+    api.deleteCard(data)
+        .then(() => {
+            card.remove();
+            card = null;
+        })
+        .catch((err) => {
+            console.log("Ошибка при удалении карточки");
+            console.log(err);
+        })
 }
 
-const cardList = new Section({
-    items: initialCards, renderer: (data) => {
-        cardList.addItem(getCard(data))
+const getCard = (data) => {
+    const card = new Card(data, currentUser, '.template', () => popupWithImage.open(data.link, data.name), {
+        handleToggleLike: function (action, cardId) {
+            if (action === "PUT") {
+                return api.putLike(cardId);
+            } else {
+                return api.deleteLike(cardId);
+            }
+        },
     },
+        {
+            handleDeleteCard: function (cardId, cardEl) {
+                confirmAction()
+                    .then(() => {
+                        deleteCardWithConfirm(cardId, cardEl);
+                    })
+                    .catch(() => console.log("отказ от удаления карточки"));
+            },
+        }
+    );
+    return card.generateCard();
+};
+
+const cardList = new Section({
+    renderer: (data) => getCard(data),
 },
     userContainerElements
 );
 
-const user = new UserInfo({
-    nameSelector: nameInputProfile,
-    jobSelector: profileAboutInput,
+const userEl = new UserInfo({
+    nameSelector,
+    jobSelector,
+    avatarSelector
 });
 
-const profileSubmitHandler = (data) => {
-    user.setUserInfo({
-        name: data["username"],
-        job: data["userjob"],
-    });
-    profilePopup.close();
-};
+const profilePopup = new PopupWithForm(profilePopupSelector, {
+    handleFormSubmit: function (user) {
+        this.savingData();
+        api.setUserInfo({ name: user.name, about: user.about })
+            .then((userData) => {
+                userEl.setUserInfo(userData);
+                profilePopup.close();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },
+});
 
-const profilePopup = new PopupWithForm(profilePopupSelector, (data) =>
-    profileSubmitHandler(data)
+const addCardPopup = new PopupWithForm(addCardPopupSelector, {
+    handleFormSubmit: function (card) {
+        this.savingData();
+        api.createCard({ name: card.name, link: card.link, })
+            .then((card) => {
+                cardList.addItem(card);
+                addCardPopup.close();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },
+}
 );
 
-const addCardSubmitHandler = (data) => {
-    const name = data["placename"];
-    const link = data["placelink"];
-    cardList.addItem(getCard({ link, name }));
-    addCardPopup.close();
+const avatarPopup = new PopupWithForm(avatarPopupSelector, {
+    handleFormSubmit: function ({ avatar }) {
+        this.savingData();
+        api
+            .updateAvatar(avatar)
+            .then((userData) => {
+                userEl.setUserAvatar(userData);
+                avatarPopup.close();
+            })
+            .catch((err) => {
+                console.log("Обновление аватара", err);
+            });
+    },
+});
+
+const handleUpdateAvatar = () => {
+    avatarFormValidator.clearValidation();
+    avatarPopup.open();
 };
 
-const addCardPopup = new PopupWithForm(addCardPopupSelector, (data) =>
-    addCardSubmitHandler(data)
-);
-
+const confirmPopup = new PopupWithConfirm(confirmPopupSelector, {
+    handleFormSubmit: function () { },
+});
 
 const profileFormValidator = new FormValidator(configValidate, profileForm);
 const addCardFormValidator = new FormValidator(configValidate, formAdd);
-
+const avatarFormValidator = new FormValidator(configValidate, avatarForm);
 
 popupWithImage.setEventListeners();
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
+avatarPopup.setEventListeners();
+confirmPopup.setEventListeners();
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 profileAddButton.addEventListener("click", handleAddCard);
 profileEditButton.addEventListener("click", handleEditProfile);
+avatarLogo.addEventListener("click", handleUpdateAvatar);
 
-cardList.renderItems();
+const api = new Api(configAPI);
+
+Promise.all([api.getUserInfo(), api.getCards()])
+    .then(([userData, cards]) => {
+        currentUser = userData;
+        userEl.setUserInfo(currentUser);
+        userEl.setUserAvatar(currentUser);
+        cardList.setItems(cards);
+        cardList.renderItems();
+    })
+    .catch((err) => {
+        console.log("Один из промисов отклонен", err);
+    });

@@ -1,3 +1,11 @@
+const configAPI = {
+    myUrl: "https://mesto.nomoreparties.co/v1/cohort-23",
+    headers: {
+        authorization: "82812fb7-c1cd-4b78-9cdb-8e7701744213",
+        "Content-Type": "application/json",
+    },
+};
+
 const configValidate = {
     formElement: '.popup__forms',
     inputSelector: '.popup__input',
@@ -5,32 +13,6 @@ const configValidate = {
     inactiveButtonClass: 'popup__button_invalid',
     buttonInvalidClass: '.popup__input_state_invalid'
 };
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 const profile = document.querySelector('.profile');
 const popupProfile = document.querySelector('.popup-profile');
@@ -54,10 +36,18 @@ const userContainerElements = document.querySelector('.elements'); //конте�
 const profileForm = popupProfile.querySelector('.popup__forms');
 const addCardPopupSelector = '.popup-place';
 const profilePopupSelector = '.popup-profile';
+const confirmPopupSelector = '.popup-confirm';
 const popupBody = document.querySelector('.popup__body');
+const avatarPopupSelector = ".popup-avatar";
+const avatarPopup = document.querySelector(avatarPopupSelector);
+const avatarForm = avatarPopup.querySelector(".popup__forms");
+const avatarLogo = document.querySelector(".profile__avatar-wrapper");
+const nameSelector = ".profile__name";
+const jobSelector = ".profile__about";
+const avatarSelector = ".profile__avatar";
 
 export { 
-    initialCards,
+    configAPI,
     configValidate,
     popupProfile,
     profile,
@@ -81,5 +71,12 @@ export {
     profileForm,
     addCardPopupSelector,
     profilePopupSelector,
-    popupBody
+    popupBody,
+    confirmPopupSelector,
+    avatarPopupSelector,
+    avatarForm,
+    avatarLogo,
+    nameSelector,
+    jobSelector,
+    avatarSelector
 }

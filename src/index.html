@@ -16,11 +16,14 @@
         </header>
         <main class="content">
             <div class="profile">
-                <img src="<%=require('./images/image.jpg')%>" alt="аватар" class="profile__avatar">
+                <div class="profile__avatar-wrapper">
+                    <img src="#" alt="аватар" class="profile__avatar">
+                    <div class="profile__avatar-overlay"></div>
+                </div>
                 <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name"></h1>
                     <button class="profile__edit-button link" type="button"></button>
-                    <p class="profile__about">Исследователь океана</p>
+                    <p class="profile__about"></p>
                 </div>
                 <button class="profile__add-button link" type="submit">
                 </button>
@@ -42,12 +45,12 @@
                     <h3 class="popup__title">Редактировать профиль</h3>
                     <fieldset class="popup__form">
                         <label for="name-card" class="popup__label">
-                            <input type="text" class="popup__input_type_name popup__input" name="username" required
+                            <input type="text" class="popup__input_type_name popup__input" name="name" required
                                 minlength="2" maxlength="40" autocomplete="off" id="name-card" placeholder="Имя">
                             <span class="error" id="name-card-error"></span>
                         </label>
                         <label for="job-card" class="popup__label">
-                            <input type="text" class="popup__input_type_description popup__input" name="userjob"
+                            <input type="text" class="popup__input_type_description popup__input" name="about"
                                 placeholder="О себе" autocomplete="off" id="job-card" required minlength="2"
                                 maxlength="200">
                             <span class="error" id="job-card-error"></span>
@@ -60,7 +63,7 @@
     </div>
 
     <!-- форма добавления карточки -->
-    <div class="popup popup-place"> 
+    <div class="popup popup-place">
         <div class="popup__body">
             <div class="popup__container popup__overlay">
                 <form name="popupPlaceInfo" class="popup-place__form popup__forms" novalidate>
@@ -68,18 +71,54 @@
                     <h3 class="popup__title">Новое место</h3>
                     <fieldset class="popup__form">
                         <label for="place-card" class="popup__label">
-                            <input type="text" class="popup__input_type_placeName popup__input" name="placename"
+                            <input type="text" class="popup__input_type_placeName popup__input" name="name"
                                 placeholder="Название" required minlength="2" maxlength="30" autocomplete="off"
                                 id="place-card">
                             <span class="error" id="place-card-error"></span>
                         </label>
                         <label for="link-card" class="popup__label">
-                            <input type="url" class="popup__input_type_imgLink popup__input" name="placelink"
+                            <input type="url" class="popup__input_type_imgLink popup__input" name="link"
                                 placeholder="Ссылка на картинку" id="link-card" required minlength="3">
                             <span class="error" id="link-card-error"></span>
                         </label>
                     </fieldset>
                     <button type="submit" class="popup__button popup__create">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- форма обновления аватара -->
+    <div class="popup popup-avatar">
+        <div class="popup__body">
+            <div class="popup__container popup__overlay">
+                <form name="avatar" class="popup__forms" novalidate>
+                    <button type="reset" class="popup__close-button link"></button>
+                    <h3 class="popup__title">Обновить аватар</h3>
+                    <fieldset class="popup__form">
+
+                        <label for="avatar-card" class="popup__label">
+                            <input type="url" class="popup__input" name="avatar" placeholder="Ссылка на аватар"
+                                id="link-card" required minlength="3">
+                            <span class="error" id="link-card-error"></span>
+                        </label>
+                    </fieldset>
+                    <button type="submit" class="popup__button popup__create">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- попап удаления карточки -->
+    <div class="popup popup-confirm">
+        <div class="popup__body">
+            <div class="popup__container popup__overlay">
+                <button type="reset" class="popup__close-button link"></button>
+                <h3 class="popup__title">Вы уверены?</h3>
+                <form name="confirm" class="popup__forms" novalidate>
+                    <button type="submit" class="popup__button link">
+                        Да
+                    </button>
                 </form>
             </div>
         </div>
@@ -100,10 +139,13 @@
     <template class="template">
         <article class="element">
             <button class="element__trash link"></button>
-            <img src="#" alt="место" class="element__image">
+            <img src="#" alt="#" class="element__image">
             <div class="element__info">
                 <h2 class="element__title"></h2>
-                <button type="button" class="element__rectangle link"></button>
+                <div class="element__like-box">
+                    <button type="button" class="element__rectangle link"></button>
+                    <span class="element__like-count">25</span>
+                </div>
             </div>
         </article>
     </template>
