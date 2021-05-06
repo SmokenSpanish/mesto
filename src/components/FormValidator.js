@@ -9,13 +9,13 @@ export default class FormValidator {
     }
 
     _showError(inputElement, errorMessage) {
-        const error = document.querySelector(`#${inputElement.id}-error`);
+        const error = this._formElement.querySelector(`#${inputElement.id}-error`);
         error.textContent = errorMessage;
         error.classList.add(this._buttonInvalidClass);
     }
 
     _hideError = (inputElement) => {
-        const error = document.querySelector(`#${inputElement.id}-error`);
+        const error = this._formElement.querySelector(`#${inputElement.id}-error`);
         error.textContent = "";
         error.classList.remove(this._buttonInvalidClass);
     }

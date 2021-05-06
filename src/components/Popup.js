@@ -11,7 +11,6 @@ export default class Popup {
 
     open() {
         this._popupEl.classList.add('popup_opened');
-        this._popupEl.addEventListener('pointerdown', this._handleEscClose)
         this._popupEl.addEventListener('pointerdown', this._handleOverlayClose)
         document.addEventListener("keydown", this._handleEscClose);
     }
@@ -23,14 +22,12 @@ export default class Popup {
     }
 
     _handleEscClose(evt) {
-        evt.target === this._popupEl
         if (evt.key === 'Escape') {
             this.close();
         }
     }
 
     _handleOverlayClose(evt) {
-        evt.target === this._popupEl
         if (!evt.target.closest('.popup__overlay')){
             this.close();
         }

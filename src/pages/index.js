@@ -14,12 +14,11 @@ import {
     profileForm, addCardPopupSelector,
     profilePopupSelector, confirmPopupSelector, avatarPopupSelector, avatarForm, avatarLogo,
     nameSelector, jobSelector, avatarSelector, popupAboutInput, nameInputPopup
-} from "../utils/Utils.js";
+} from "../utils/constants.js";
 
 let currentUser;
 
 const handleAddCard = () => {
-    formAdd.reset();
     addCardFormValidator.clearValidation();
     addCardPopup.open();
 };
@@ -76,7 +75,7 @@ const getCard = (data) => {
 };
 
 const cardList = new Section({
-    renderer: (data) => getCard(data),
+    renderer: getCard,
 },
     userContainerElements
 );
@@ -89,8 +88,8 @@ const userEl = new UserInfo({
 
 const profilePopup = new PopupWithForm(profilePopupSelector, {
     handleFormSubmit: function (user) {
-        this.savingData();
-        api.setUserInfo({ name: user.name, about: user.about })
+        profilePopup.renderLoading();
+        api.setUserInfo(user)
             .then((userData) => {
                 userEl.setUserInfo(userData);
                 profilePopup.close();
@@ -103,8 +102,8 @@ const profilePopup = new PopupWithForm(profilePopupSelector, {
 
 const addCardPopup = new PopupWithForm(addCardPopupSelector, {
     handleFormSubmit: function (card) {
-        this.savingData();
-        api.createCard({ name: card.name, link: card.link, })
+        addCardPopup.renderLoading();
+        api.createCard(card)
             .then((card) => {
                 cardList.addItem(card);
                 addCardPopup.close();
@@ -118,7 +117,7 @@ const addCardPopup = new PopupWithForm(addCardPopupSelector, {
 
 const avatarPopup = new PopupWithForm(avatarPopupSelector, {
     handleFormSubmit: function ({ avatar }) {
-        this.savingData();
+        avatarPopup.renderLoading();
         api
             .updateAvatar(avatar)
             .then((userData) => {
