@@ -1,7 +1,8 @@
-.element__image{
-    border-radius: 10px 10px 0 0;
-    margin: 0;
-    max-width: 100%;
-    min-width: 100%;
-    height: 282px;
+.element__image {
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  object-position: center;
 }
